@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title
+  body
+  block content
+    h1= title
+    h2= title2
+    .container
+        if !searchResults
+          .result-count
+            p No results found for your query
+        else
+            each story in searchResults
+                h3.title #{story.title}
+                p #{story.author}
