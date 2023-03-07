@@ -11,6 +11,8 @@ html
           .result-count
             p No results found for your query
         else
+            hr
+            hr
             each story in searchResults
-                h3.title #{story.title}
-                p #{story.author}
+                h3.title #{story.summary}
+                p #{story.details}
