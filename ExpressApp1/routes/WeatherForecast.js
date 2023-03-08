@@ -9,8 +9,8 @@ router.get('/', async function (req, res) {
 
     res.render('WeatherForecast',
         {
-            title: 'WeatherForecast Oz',
-            title2: 'WeatherForecast Oz2',
+            title: 'WeatherForecast',
+            title2: 'NodeJs with Pug',
             searchResults: results
         });
 });
