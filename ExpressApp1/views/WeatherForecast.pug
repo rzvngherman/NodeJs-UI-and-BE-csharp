@@ -18,3 +18,19 @@ block content
                     div(class='row')
                         div.col #{story.summary}
                         div.col #{story.details}
+
+    .container-mocked-data
+            if !searchResultsMock
+              .result-count
+                br
+                p No results found for your query
+            else
+                hr
+                hr
+                div(class='row card-header')
+                    .col (Mock response)Summary
+                    div.col Details
+                each story in searchResultsMock
+                    div(class='row')
+                        div.col #{story.summary}
+                        div.col #{story.details}

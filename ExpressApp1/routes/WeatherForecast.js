@@ -2,17 +2,20 @@
 var express = require('express');
 var router = express.Router();
 const base_url = "http://localhost:5264";
+const getAllRandom_url = base_url + '/api/WeatherForecast/GetAllRandom';
 
 /* load view page 'WeatherForecast' */
 router.get('/', async function (req, res) {
 
     const results = await GetAllWeatherForecast();
+    const resultsMock = await GetAllWeatherForecastMock();
 
     res.render('WeatherForecast',
         {
             title: 'WeatherForecast api call',
             title2: 'NodeJs with Pug',
-            searchResults: results
+            searchResults: results,
+            searchResultsMock: resultsMock
         });
 });
 
@@ -22,11 +25,18 @@ module.exports = router;
 async function GetAllWeatherForecast() {
     try {
 
-        const response = await fetch(base_url + '/api/WeatherForecast/GetAllRandom');
+        const response = await fetch(getAllRandom_url);
         const results = await response.json();
         return results;
     }
     catch (error) {
-        console.log(error.response.body);
+        //console.log(error.response.body);
+        var arr = [{ "summary": "ERROR: url " + getAllRandom_url, "details": error.stack }];
+        return arr; 
     }
+}
+
+async function GetAllWeatherForecastMock() {
+    var arr = [{ "summary": "summary 01", "details": "details 11" }, { "summary": "summary 02", "details": "details 22" }];
+    return arr;
 }
