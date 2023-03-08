@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+const base_url = "http://localhost:5264";
 
 /* load view page 'WeatherForecast' */
 router.get('/', async function (req, res) {
@@ -9,7 +10,7 @@ router.get('/', async function (req, res) {
 
     res.render('WeatherForecast',
         {
-            title: 'WeatherForecast',
+            title: 'WeatherForecast api call',
             title2: 'NodeJs with Pug',
             searchResults: results
         });
@@ -21,7 +22,7 @@ module.exports = router;
 async function GetAllWeatherForecast() {
     try {
 
-        const response = await fetch('http://localhost:5264/api/WeatherForecast/GetAllRandom');
+        const response = await fetch(base_url + '/api/WeatherForecast/GetAllRandom');
         const results = await response.json();
         return results;
     }

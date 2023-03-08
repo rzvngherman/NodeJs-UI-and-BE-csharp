@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
     const x = "my first app";
     console.log(x);
 
-    res.render('index', { title: 'Express2' });
+    res.render('index', { title: 'NodeJs site' });
 });
 
 module.exports = router;
