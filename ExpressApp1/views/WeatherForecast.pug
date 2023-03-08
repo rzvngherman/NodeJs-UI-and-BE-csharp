@@ -5,12 +5,16 @@ block content
     h1= title
     p Welcome to #{title}
     .container
-        if !searchResults
-          .result-count
-            p No results found for your query
-        else
-            hr
-            hr
-            each story in searchResults
-                h3.title #{story.summary}
-                p #{story.details}
+            if !searchResults
+              .result-count
+                p No results found for your query
+            else
+                hr
+                hr
+                div(class='row card-header')
+                    .col Summary
+                    div.col Details
+                each story in searchResults
+                    div(class='row')
+                        div.col #{story.summary}
+                        div.col #{story.details}
