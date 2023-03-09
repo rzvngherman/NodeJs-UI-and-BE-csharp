@@ -30,15 +30,6 @@ const requestListener = function (req, res) {
             get405(req, res);
             break;
     }
-
-    ////Serving JSON
-    //res.setHeader("Content-Type", "application/json");
-    //res.writeHead(200);
-    //res.end('{"message": "This is a JSON response"}');
-
-    ////Serving text
-    ////res.writeHead(200, { 'Content-Type': 'text/plain' });
-    ////res.end('Hello World\n');
 };
 
 const server = http.createServer(requestListener)
@@ -52,19 +43,11 @@ console.log("    '/authors'");
 console.log("    '/date'");
 
 function get405(req, resp) {
-    //resp.writeHead(405, "Method not supported", { "Content-Type": "text/html" });
-    //resp.write("<html><html><head><title>405</title></head><body>405: Method not supported</body></html>");
-    //resp.end();
-    
 	resp.writeHead(405);
     resp.end(JSON.stringify({ error: "Method not supported" }));
 }
 
 function get404(req, resp) {
-    //resp.writeHead(404, "Resource Not Found", { "Content-Type": "text/html" });
-    //resp.write("<html><html><head><title>405</title></head><body>404: Resource Not Found</body></html>");
-    //resp.end();
-    
 	resp.writeHead(404);
     resp.end(JSON.stringify({ error: "Resource not found" }));
 }
@@ -72,6 +55,11 @@ function get404(req, resp) {
 function get500(resp, errorMessage){
     resp.writeHead(500);
     resp.end(JSON.stringify({ error: errorMessage }));
+}
+
+function get200(resp, message){
+    resp.writeHead(200);
+    resp.end(JSON.stringify({ success: message }));
 }
 
 function ProcessGet(req, res) {
@@ -104,25 +92,24 @@ function ProcessPost(req, res) {
 			collectRequestData(req, result => {
 				console.log(result);
 
-                let obj = booksArr.find(o => o.title === result.title);
-
-                if(obj !== undefined)
+                let bookToFind = booksArr.find(o => o.title === result.title);
+                if(bookToFind !== undefined)
                 {
                     get500(res, `Book with title '${result.title}' already exists !`);                    
                 }
                 else
                 {
                     booksArr.push(result);
-                    res.writeHead(200);
-                    res.end(JSON.stringify({ success: `Book with title '${result.title}' added !` }));
-                    //res.end();
+                    get200(res, `Book with title '${result.title}' added !`);
                 }
             });
 
             break
 
         default:
-            get404(req, res);
+            {
+                get404(req, res);
+            }
 	}
 }
 
@@ -132,9 +119,7 @@ function collectRequestData(request, callback) {
         body += chunk.toString();
     });
     request.on('end', () => {
-        ////callback(parse(body));
         callback(JSON.parse(body));
-        //callback(body);
     });
 }
 
