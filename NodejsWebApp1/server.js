@@ -4,10 +4,10 @@ var port = process.env.PORT || 1337;
 const host = 'localhost'; 
 const { parse } = require('querystring');
 
-const books = JSON.stringify([
+const booksArr = [
     { title: "The Alchemist", author: "Paulo Coelho", year: 1988 },
     { title: "The Prophet", author: "Kahlil Gibran", year: 1923 }
-]);
+];
 
 const authors = JSON.stringify([
     { name: "Paulo Coelho", countryOfBirth: "Brazil", yearOfBirth: 1947 },
@@ -69,11 +69,16 @@ function get404(req, resp) {
     resp.end(JSON.stringify({ error: "Resource not found" }));
 }
 
+function get500(resp, errorMessage){
+    resp.writeHead(500);
+    resp.end(JSON.stringify({ error: errorMessage }));
+}
+
 function ProcessGet(req, res) {
     switch (req.url) {
         case "/books":
             res.writeHead(200);
-            res.end(books);
+            res.end(JSON.stringify(booksArr));
             break
 
         case "/authors":
@@ -98,7 +103,20 @@ function ProcessPost(req, res) {
         case "/books":
 			collectRequestData(req, result => {
 				console.log(result);
-				res.end(`Book with title '${result.title}' added !`);
+
+                let obj = booksArr.find(o => o.title === result.title);
+
+                if(obj !== undefined)
+                {
+                    get500(res, `Book with title '${result.title}' already exists !`);                    
+                }
+                else
+                {
+                    booksArr.push(result);
+                    res.writeHead(200);
+                    res.end(JSON.stringify({ success: `Book with title '${result.title}' added !` }));
+                    //res.end();
+                }
             });
 
             break
@@ -114,8 +132,9 @@ function collectRequestData(request, callback) {
         body += chunk.toString();
     });
     request.on('end', () => {
-        //callback(parse(body));
+        ////callback(parse(body));
         callback(JSON.parse(body));
+        //callback(body);
     });
 }
 
