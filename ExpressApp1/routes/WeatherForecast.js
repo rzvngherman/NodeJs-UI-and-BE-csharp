@@ -1,6 +1,9 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+
+var Cat = require('../models/Cat.js');
+
 const base_url = "http://localhost:5264";
 const getAllRandom_url = base_url + '/api/WeatherForecast/GetAllRandom';
 
@@ -24,6 +27,9 @@ module.exports = router;
 //using fetch
 async function GetAllWeatherForecast() {
     try {
+
+        let cat1 = new Cat();
+        cat1.initModel({ summary: "sum 01", details: "det 01" });
 
         const response = await fetch(getAllRandom_url);
         const results = await response.json();

@@ -145,3 +145,5 @@ dist
 ExpressApp1/bin/
 ExpressApp1/obj/
 .vs/
+NodejsWebApp1/bin/
+NodejsWebApp1/obj/

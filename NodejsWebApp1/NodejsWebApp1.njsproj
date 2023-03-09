@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <Name>ExpressApp1</Name>
-    <RootNamespace>ExpressApp1</RootNamespace>
+    <Name>NodejsWebApp1</Name>
+    <RootNamespace>NodejsWebApp1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>82bec8c6-17c9-4383-a5b6-0b416536c27a</ProjectGuid>
+    <ProjectGuid>f749ed56-8435-48b9-b6ff-8a3d703d91ed</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>server.js</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,44 +28,9 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="app.js" />
-    <Content Include="public\include\css\bootstrap.min.css" />
-    <Content Include="public\include\js\bootstrap.min.js" />
-    <Content Include="models\Cat.js">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="routes\index.js" />
-    <Content Include="routes\users.js" />
+    <Content Include="server.js" />
     <Content Include="package.json" />
-    <Content Include="public\stylesheets\main.css" />
     <Content Include="README.md" />
-    <Content Include="routes\WeatherForecast.js">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="routes\WeatherForecastTest.js">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="views\header.pug">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="views\index.pug" />
-    <Content Include="views\layout.pug" />
-    <Content Include="views\error.pug" />
-    <Content Include="views\WeatherForecast.pug">
-      <SubType>Code</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="public\include\" />
-    <Folder Include="public\include\css\" />
-    <Folder Include="public\include\js\" />
-    <Folder Include="public\" />
-    <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
-    <Folder Include="models\" />
-    <Folder Include="public\stylesheets\" />
-    <Folder Include="routes\" />
-    <Folder Include="views\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
