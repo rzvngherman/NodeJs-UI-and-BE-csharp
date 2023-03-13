@@ -1,6 +1,7 @@
 //includes
 var URL = require('url');
 const Book = require('../models/book');
+const Author = require('../models/author');
 const lib1 = require("../helpers/response_functions");
 
 //book array
@@ -9,10 +10,10 @@ const booksArr = [
     ,new Book("The Prophet", "Kahlil Gibran", 1923)
 ];
 
-const authors = JSON.stringify([
-    { name: "Paulo Coelho", countryOfBirth: "Brazil", yearOfBirth: 1947 },
-    { name: "Kahlil Gibran", countryOfBirth: "Lebanon", yearOfBirth: 1883 }
-]);
+const authorArr = [
+    new Author("Paulo Coelho", "Brazil", 1947)
+    ,new Author("Kahlil Gibran", "Lebanon", 1883)
+];
 
 function ProcessGet(req, res) {
     
@@ -43,7 +44,7 @@ function ProcessGet(req, res) {
 
         case "/authors":
             res.writeHead(200);
-            res.end(authors);
+            res.end(JSON.stringify(authorArr));
             break
 
         case "/date":
