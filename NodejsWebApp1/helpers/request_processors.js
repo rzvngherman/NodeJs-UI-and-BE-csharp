@@ -2,15 +2,15 @@
 var URL = require('url');
 const Book = require('../models/book');
 const Author = require('../models/author');
-const lib1 = require("../helpers/response_functions");
+const _respFct = require("../helpers/response_functions");
 
 //book array
-const booksArr = [
+const _bookArr = [
     new Book("The Alchemist", "Paulo Coelho", 1988)
     ,new Book("The Prophet", "Kahlil Gibran", 1923)
 ];
 
-const authorArr = [
+const _authorArr = [
     new Author("Paulo Coelho", "Brazil", 1947)
     ,new Author("Kahlil Gibran", "Lebanon", 1883)
 ];
@@ -23,15 +23,15 @@ function ProcessGet(req, res) {
     switch (pathname) {
         case "/books":
             res.writeHead(200);
-            res.end(JSON.stringify(booksArr));
+            res.end(JSON.stringify(_bookArr));
             break
 
         case "/book":
             var title = query.title;
-            let bookToFind = booksArr.find(o => o.title === title);
+            let bookToFind = _bookArr.find(o => o.title === title);
             if(bookToFind === undefined)
             {
-                lib1.get500(res, `Book with title '${title}' not found !`);                    
+                _respFct.get500(res, `Book with title '${title}' not found !`);                    
             }
             else
             {
@@ -42,7 +42,7 @@ function ProcessGet(req, res) {
 
         case "/authors":
             res.writeHead(200);
-            res.end(JSON.stringify(authorArr));
+            res.end(JSON.stringify(_authorArr));
             break
 
         case "/date":
@@ -52,7 +52,7 @@ function ProcessGet(req, res) {
             break
 
         default:
-            lib1.get404(res);
+            _respFct.get404(res);
     }
 }
 
@@ -62,15 +62,15 @@ function ProcessDelete(req, res) {
 			collectRequestData(req, result => {
 				console.log(result);
 
-                let bookToFind = booksArr.find(o => o.title === result.title);
+                let bookToFind = _bookArr.find(o => o.title === result.title);
                 if(bookToFind === undefined)
                 {
-                    lib1.get500(res, `Book with title '${result.title}' does not exists.`);                    
+                    _respFct.get500(res, `Book with title '${result.title}' does not exists.`);                    
                 }
                 else
                 {
-                    booksArr.pop(bookToFind);
-                    lib1.get200(res, `Book with title '${result.title}' removed !`);
+                    _bookArr.pop(bookToFind);
+                    _respFct.get200(res, `Book with title '${result.title}' removed !`);
                 }
             });
 
@@ -78,7 +78,7 @@ function ProcessDelete(req, res) {
 
         default:
             {
-                lib1.get404(res);
+                _respFct.get404(res);
             }
 	}
 }
@@ -89,15 +89,15 @@ function ProcessPost(req, res) {
 			collectRequestData(req, result => {
 				console.log(result);
 
-                let bookToFind = booksArr.find(o => o.title === result.title);
+                let bookToFind = _bookArr.find(o => o.title === result.title);
                 if(bookToFind !== undefined)
                 {
-                    lib1.get500(res, `Book with title '${result.title}' already exists !`);                    
+                    _respFct.get500(res, `Book with title '${result.title}' already exists !`);                    
                 }
                 else
                 {
-                    booksArr.push(result);
-                    lib1.get200(res, `Book with title '${result.title}' added !`);
+                    _bookArr.push(result);
+                    _respFct.get200(res, `Book with title '${result.title}' added !`);
                 }
             });
 
@@ -105,7 +105,7 @@ function ProcessPost(req, res) {
 
         default:
             {
-                lib1.get404(res);
+                _respFct.get404(res);
             }
 	}
 }

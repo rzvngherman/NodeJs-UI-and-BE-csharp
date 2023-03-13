@@ -3,8 +3,8 @@
 var http = require('http');
 var port = process.env.PORT || 1337;
 
-const lib2 = require("./helpers/request_processors.js");
-const lib1 = require("./helpers/response_functions");
+const _reqProcess = require("./helpers/request_processors.js");
+const _respFct = require("./helpers/response_functions");
 
 //method 'requestListener'
 const requestListener = function (req, res) {
@@ -12,19 +12,19 @@ const requestListener = function (req, res) {
     res.setHeader("Content-Type", "application/json");
     switch (req.method) {
         case "GET":
-            lib2.ProcessGet(req, res);
+            _reqProcess.ProcessGet(req, res);
             break
 
         case "POST":
-            lib2.ProcessPost(req, res);
+            _reqProcess.ProcessPost(req, res);
             break
 
         case "DELETE":
-            lib2.ProcessDelete(req, res);
+            _reqProcess.ProcessDelete(req, res);
             break
 
         default:
-            lib1.get405(res);
+            _respFct.get405(res);
             break;
     }
 };
