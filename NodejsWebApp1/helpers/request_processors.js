@@ -1,8 +1,11 @@
 //includes
 var URL = require('url');
+const _respFct = require("../helpers/response_functions");
+
+//classes
 const Book = require('../models/book');
 const Author = require('../models/author');
-const _respFct = require("../helpers/response_functions");
+const Alien = require('../models/alien');
 
 //book array
 const _bookArr = [
@@ -31,7 +34,7 @@ function ProcessGet(req, res) {
             let bookToFind = _bookArr.find(o => o.title === title);
             if(bookToFind === undefined)
             {
-                _respFct.get500(res, `Book with title '${title}' not found !`);                    
+                _respFct.get500(res, `Book with title '${title}' not found !`);
             }
             else
             {
@@ -49,6 +52,16 @@ function ProcessGet(req, res) {
             res.writeHead(200);
             var txt = query.year + " " + query.month;
             res.end(txt);
+            break
+
+        case "/alien":
+
+            const alien1 = new Alien("Ali", "I'm Ali the alien!", 10)
+            const alien2 = new Alien("Lien", "Run for your lives!", 15)
+            var attackMessage = alien1.attack() // output: I'm attacking with a power of 10!
+            var txt = "Attack: " + attackMessage + "; Power: " + alien2.power;
+           _respFct.get200(res, txt);
+
             break
 
         default:
