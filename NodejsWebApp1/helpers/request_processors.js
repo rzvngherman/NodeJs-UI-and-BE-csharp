@@ -16,12 +16,10 @@ const authorArr = [
 ];
 
 function ProcessGet(req, res) {
-    
     const urlObj = URL.parse(req.url, true);
     const query = urlObj.query;
     var pathname = urlObj.pathname.toLowerCase();
-
-    //switch (req.url) {
+    
     switch (pathname) {
         case "/books":
             res.writeHead(200);
@@ -54,7 +52,7 @@ function ProcessGet(req, res) {
             break
 
         default:
-            lib1.get404(req, res);
+            lib1.get404(res);
     }
 }
 
@@ -80,7 +78,7 @@ function ProcessDelete(req, res) {
 
         default:
             {
-                lib1.get404(req, res);
+                lib1.get404(res);
             }
 	}
 }
@@ -107,7 +105,7 @@ function ProcessPost(req, res) {
 
         default:
             {
-                lib1.get404(req, res);
+                lib1.get404(res);
             }
 	}
 }

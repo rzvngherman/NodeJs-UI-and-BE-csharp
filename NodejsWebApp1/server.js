@@ -6,6 +6,7 @@ var port = process.env.PORT || 1337;
 const lib2 = require("./helpers/request_processors.js");
 const lib1 = require("./helpers/response_functions");
 
+//method 'requestListener'
 const requestListener = function (req, res) {
     //Serving JSON
     res.setHeader("Content-Type", "application/json");
@@ -23,7 +24,7 @@ const requestListener = function (req, res) {
             break
 
         default:
-            lib1.get405(req, res);
+            lib1.get405(res);
             break;
     }
 };

@@ -1,9 +1,9 @@
-function get405(req, resp) {
+function get405(resp) {
 	resp.writeHead(405);
     resp.end(JSON.stringify({ error: "Method not supported" }));
 }
 
-function get404(req, resp) {
+function get404(resp) {
 	resp.writeHead(404);
     resp.end(JSON.stringify({ error: "Resource not found" }));
 }
