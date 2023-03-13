@@ -17,12 +17,8 @@ class Book { // Name of the class
         this.#author = new Author(author, "Romania", 1982);
         this.#year = year
     }
-    // These will be the object's methods.
-    fly = () => console.log("Zzzzzziiiiiinnnnnggggg!!")
-    sayTitle = () => console.log(this.#title)
-    incB() { this.#b++;}
     
-    //for 'JSON.stringify'
+    //whin 'JSON.stringify' is used
     toJSON() {
       return {
         Title: this.#title, 

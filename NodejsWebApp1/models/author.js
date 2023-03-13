@@ -9,11 +9,8 @@ class Author { // Name of the class
         this.#countryOfBirth = countryOfBirth
         this.#yearOfBirth = yearOfBirth
     }
-    // These will be the object's methods.
-    fly = () => console.log("Zzzzzziiiiiinnnnnggggg!!")
-    sayName = () => console.log(this.#name)
 
-        //for 'JSON.stringify'
+    //whin 'JSON.stringify' is used
     toJSON() {
       return {
         Name: this.#name, 
