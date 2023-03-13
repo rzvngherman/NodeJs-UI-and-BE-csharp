@@ -30,18 +30,25 @@ function ProcessGet(req, res) {
     switch (pathname) {
         case "/books":
             res.writeHead(200);
-            res.end(JSON.stringify(_bookArr));
+            var x1 = JSON.stringify(_bookArr);
+            res.end(x1);
             break
 
         case "/book":
             var title = query.title;
-            let bookToFind = _bookArr.find(o => o.title === title);
+            let bookToFind = _bookArr.find(o => o.Title === title);
             if(bookToFind === undefined)
             {
                 _respFct.get500(res, `Book with title '${title}' not found !`);
             }
             else
             {
+                var x1 = bookToFind.Author.Name;
+                var x2 = bookToFind.Year;
+
+                var x3 = bookToFind.Title;
+                bookToFind.Title = "title2";
+
                 res.writeHead(200);
                 res.end(JSON.stringify(bookToFind));
             }            
