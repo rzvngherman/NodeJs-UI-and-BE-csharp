@@ -40,3 +40,5 @@ console.log("    GET '/book?title=...'");
 console.log("    DELETE '/book'");
 console.log("    GET '/authors'");
 console.log("    GET '/date?year=...&month=...'");
+console.log("    GET '/alien'");
+console.log("    GET '/animal'");

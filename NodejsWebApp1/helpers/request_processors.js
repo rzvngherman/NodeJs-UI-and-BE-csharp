@@ -6,6 +6,10 @@ const _respFct = require("../helpers/response_functions");
 const Book = require('../models/book');
 const Author = require('../models/author');
 const Alien = require('../models/alien');
+const Enemy = require('../models/enemy');
+const Animal = require('../models/animals/animal');
+const Pig = require('../models/animals/pig');
+const Dog = require('../models/animals/dog');
 
 //book array
 const _bookArr = [
@@ -60,6 +64,17 @@ function ProcessGet(req, res) {
             const alien2 = new Alien("Lien", "Run for your lives!", 15)
             var attackMessage = alien1.attack() // output: I'm attacking with a power of 10!
             var txt = "Attack: " + attackMessage + "; Power: " + alien2.power;
+           _respFct.get200(res, txt);
+            break
+
+        case "/animal":
+
+            const myAnimal  = new Animal()
+            const myPig  = new Pig()
+            const myDog   = new Dog()
+
+            var txt = "animal: '" + myAnimal.GetSound() + "'; pig: '" + myPig.GetSound() + "'; dog: '" + myDog.GetSound() + "'";
+
            _respFct.get200(res, txt);
 
             break

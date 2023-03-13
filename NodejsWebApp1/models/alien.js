@@ -9,6 +9,7 @@ class Alien extends Enemy {
     }
     fly = () => console.log("Zzzzzziiiiiinnnnnggggg!!")
     sayPhrase = () => console.log(this.phrase)
+    attack = () => {return "Now I'm doing a different thing, HA!"; }
 }
 
 module.exports = Alien
