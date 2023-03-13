@@ -12,10 +12,10 @@ class Book { // Name of the class
     static #c = 3;  // .#c is private and static
 
     // The constructor method will take a number of parameters and assign those parameters as properties to the created object.
-    constructor (title, author, year) {
+    constructor (title, authorName, publicationYear, countryOfBirth = "-", yearOfBirth = -1) {
         this.#title = title
-        this.#author = new Author(author, "Romania", 1982);
-        this.#year = year
+        this.#author = new Author(authorName, countryOfBirth,  yearOfBirth);
+        this.#year = publicationYear
     }
     
     //whin 'JSON.stringify' is used

@@ -13,7 +13,7 @@ const Dog = require('../models/animals/dog');
 
 //book array
 const _bookArr = [
-    new Book("The Alchemist", "Paulo Coelho", 1988)
+    new Book("The Alchemist", "Paulo Coelho", 1988, "Romania", 1982)
     ,new Book("The Prophet", "Kahlil Gibran", 1923)
 ];
 
