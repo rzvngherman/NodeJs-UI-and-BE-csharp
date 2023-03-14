@@ -10,12 +10,9 @@ const Enemy = require('../models/enemy');
 const Animal = require('../models/animals/animal');
 const Pig = require('../models/animals/pig');
 const Dog = require('../models/animals/dog');
-
-//book array
-const _bookArr = [
-    new Book("The Alchemist", "Paulo Coelho", 1988, "Romania", 1982)
-    ,new Book("The Prophet", "Kahlil Gibran", 1923)
-];
+const BookService = require('../service/bookService');
+const { title } = require('process');
+const _bookService = new BookService();
 
 const _authorArr = [
     new Author("Paulo Coelho", "Brazil", 1947)
@@ -30,13 +27,14 @@ function ProcessGet(req, res) {
     switch (pathname) {
         case "/books":
             res.writeHead(200);
-            var jsonString = JSON.stringify(_bookArr);
+            var jsonString = JSON.stringify(_bookService.GetAllBooks());
             res.end(jsonString);
             break
 
         case "/book":
             var title = query.title;
-            let bookToFind = _bookArr.find(o => o.Title === title);
+
+            let bookToFind = _bookService.GetByTitle(title);
             if(bookToFind === undefined)
             {
                 _respFct.get500(res, `Book with title '${title}' not found !`);
@@ -91,16 +89,8 @@ function ProcessDelete(req, res) {
 			collectRequestData(req, result => {
 				console.log(result);
 
-                let bookToFind = _bookArr.find(o => o.title === result.title);
-                if(bookToFind === undefined)
-                {
-                    _respFct.get500(res, `Book with title '${result.title}' does not exists.`);                    
-                }
-                else
-                {
-                    _bookArr.pop(bookToFind);
-                    _respFct.get200(res, `Book with title '${result.title}' removed !`);
-                }
+                _bookService.DeleteByTitle(result.title);
+                _respFct.get200(res, `Book with title '${result.title}' removed !`);
             });
 
             break
@@ -118,15 +108,14 @@ function ProcessPost(req, res) {
 			collectRequestData(req, result => {
 				console.log(result);
 
-                let bookToFind = _bookArr.find(o => o.title === result.title);
-                if(bookToFind !== undefined)
+                //TODO
+                var message = _bookService.AddBook(result);
+                if(message !== '')
                 {
-                    _respFct.get500(res, `Book with title '${result.title}' already exists !`);                    
+                    _respFct.get500(res, message);
                 }
-                else
-                {
-                    _bookArr.push(result);
-                    _respFct.get200(res, `Book with title '${result.title}' added !`);
+                else{
+                     _respFct.get200(res, `Book with title '${result.title}' added !`);
                 }
             });
 
