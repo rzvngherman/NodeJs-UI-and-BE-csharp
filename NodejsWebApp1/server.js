@@ -3,33 +3,9 @@
 var http = require('http');
 var port = process.env.PORT || 1337;
 
-const _reqProcess = require("./helpers/request_processors.js");
-const _respFct = require("./helpers/response_functions");
+const routes = require("./routes");
 
-//method 'requestListener'
-const requestListener = function (req, res) {
-    //Serving JSON
-    res.setHeader("Content-Type", "application/json");
-    switch (req.method) {
-        case "GET":
-            _reqProcess.ProcessGet(req, res);
-            break
-
-        case "POST":
-            _reqProcess.ProcessPost(req, res);
-            break
-
-        case "DELETE":
-            _reqProcess.ProcessDelete(req, res);
-            break
-
-        default:
-            _respFct.get405(res);
-            break;
-    }
-};
-
-const server = http.createServer(requestListener)
+const server = http.createServer(routes)
 
 server.listen(port);
 
