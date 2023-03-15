@@ -12,13 +12,14 @@ class BookService { // Name of the class
       
     AddBook(book) {
         let bookToFind = _bookList.find(o => o.Title === book.Title);
-        if(bookToFind === undefined)
+        // `value == null` is the same as `value === undefined || value === null`
+        if(bookToFind == null)
         {
             _bookList.push(book);
         }
         else
         {
-            throw new Error(`Book with title '${book.title}' already exists !`)
+            throw new Error(`Book with title '${book.Title}' already exists !`)
         }
     }
 
