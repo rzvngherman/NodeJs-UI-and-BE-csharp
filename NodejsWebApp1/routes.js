@@ -18,6 +18,27 @@ const requestListener = function (req, res) {
     const query = urlObj.query;
 
     switch (pathname) {
+        case '/':
+            if(req.method == "GET")
+            {
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                
+                var builder = GetEndpointDescriptions();
+                
+                var html = "<ul>"
+                builder.forEach(element => {
+                    html += "<li>" + element + "</li>"
+                });
+                html += "</ul>"
+
+                res.end(html);
+            }
+            else
+            {
+                _respFct.get404(res);
+            }
+            break;
+
         case "/book":
         case "/books":
             _bookReqProcess.ProcessRequest(req,res);
@@ -56,4 +77,18 @@ const requestListener = function (req, res) {
 	}
 };
 
-module.exports = requestListener;
+function GetEndpointDescriptions() {
+    var builder = [];
+    builder.push("    GET '/books' -> get all books");
+    builder.push("    POST '/books' -> add a book to collection");
+    builder.push("    GET '/book?title=...' -> get a book by tile");
+    builder.push("    DELETE '/book' -> delete a book by title");
+    builder.push("    GET '/authors' -> get all authors");
+    builder.push("    GET '/date?year=...&month=...'");
+    builder.push("    GET '/alien'");
+    builder.push("    GET '/animal'");
+
+    return builder
+}
+
+module.exports = { requestListener , GetEndpointDescriptions};
