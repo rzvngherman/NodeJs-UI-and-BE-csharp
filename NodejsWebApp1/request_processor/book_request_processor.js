@@ -11,73 +11,68 @@ function ProcessRequest(req,res) {
     const query = urlObj.query;
     var pathname = urlObj.pathname.toLowerCase();
     
-    switch (req.method) {
-        case "GET":
-            switch (pathname) 
-            {
-                case "/books":
-                    res.writeHead(200);
-                    var jsonString = JSON.stringify(_bookService.GetAllBooks());
-                    res.end(jsonString);
-                    break
-        
-                case "/book":
-                    var title = query.title;
-        
-                    let bookToFind = _bookService.GetByTitle(title);
-                    if(bookToFind === undefined)
-                    {
-                        _respFct.get500(res, `Book with title '${title}' not found !`);
-                    }
-                    else
-                    {
-                        res.writeHead(200);
-                        res.end(JSON.stringify(bookToFind));
-                    }            
-                    break
-
-                    default:
-                        _respFct.get404(res);
-            }
-
-            break
-
-        case "POST":
-            // pathname 'books'
-            collectRequestData(req, result => 
-                {
-                    try
-                    {
-                        var bookToAdd = new Book(result.title, result.author, result.year)
-                        _bookService.AddBook(bookToAdd);
-                        _respFct.get200(res, `Book with title '${result.title}' added !`);
-                    }
-                    catch (error) {
-                        _respFct.get500(res, error.message);
-                    }
-                });
-            break
-
-        case "DELETE":
-            // pathname 'books'
-            collectRequestData(req, result => 
-                {
-                    try
-                    {
-                        _bookService.DeleteByTitle(result.title);
-                        _respFct.get200(res, `Book with title '${result.title}' removed !`);
-                    }
-                    catch(error)
-                    {
-                        _respFct.get500(res, error.message);
-                    }
-                });
-            break
-
-        default:
-            _respFct.get405(res);
-            break;
+    //GET
+    if(req.method == "GET" && pathname == "/books")
+    {
+        res.writeHead(200);
+        var jsonString = JSON.stringify(_bookService.GetAllBooks());
+        res.end(jsonString);
+        return;
     }
+
+    if(req.method == "GET" && pathname == "/book")
+    {
+        var title = query.title;
+        let bookToFind = _bookService.GetByTitle(title);
+        if(bookToFind == null){
+            _respFct.get500(res, `Book with title '${title}' not found !`);
+        }
+        else{
+            res.writeHead(200);
+            res.end(JSON.stringify(bookToFind));
+        }
+        
+        return
+    }
+
+    //POST
+    if(req.method == "POST" && pathname == "/books")
+    {
+        collectRequestData(req, result => 
+            {
+                try
+                {
+                    var bookToAdd = new Book(result.title, result.author, result.year)
+                    _bookService.AddBook(bookToAdd);
+                    _respFct.get200(res, `Book with title '${result.title}' added !`);
+                }
+                catch (error) {
+                    _respFct.get500(res, error.message);
+                }
+            });
+
+            return;
+    }
+
+    //DELETE
+    if(req.method == "DELETE" && pathname == "/book")
+    {
+        collectRequestData(req, result => 
+            {
+                try
+                {
+                    _bookService.DeleteByTitle(result.title);
+                    _respFct.get200(res, `Book with title '${result.title}' removed !`);
+                }
+                catch(error){
+                    _respFct.get500(res, error.message);
+                }
+            });
+
+        return;
+    }
+
+    _respFct.get404(res);
 }
 
 function collectRequestData(request, callback) {
