@@ -87,6 +87,7 @@ function GetEndpointDescriptions() {
     builder.push("    GET '/date?year=...&month=...'");
     builder.push("    GET '/alien'");
     builder.push("    GET '/animal'");
+    builder.push("    GET '/book?year=...' -> get books by year");
 
     return builder
 }

@@ -3,6 +3,7 @@ const Book = require('../models/book');
 const _bookList = [
     new Book("The Alchemist", "Paulo Coelho", 1988, "Romania", 1982)
     ,new Book("The Prophet", "Kahlil Gibran", 1923)
+    ,new Book("The Prophet 2", "Kahlil Gibran", 1923)
 ];
 
 class BookService { // Name of the class
@@ -28,7 +29,13 @@ class BookService { // Name of the class
     }
 
     GetByTitle(title){
-        return _bookList.find(o => o.Title === title);
+        var bookToFind = _bookList.find(o => o.Title === title);
+        return bookToFind;
+    }
+
+    GetByYear(year){
+        var bookToFind = _bookList.filter(o => o.Year === year);
+        return bookToFind;
     }
 
     DeleteByTitle(title){

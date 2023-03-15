@@ -20,7 +20,7 @@ function ProcessRequest(req,res) {
         return;
     }
 
-    if(req.method == "GET" && pathname == "/book")
+    if(req.method == "GET" && pathname == "/book" && query.title != null)
     {
         var title = query.title;
         let bookToFind = _bookService.GetByTitle(title);
@@ -30,6 +30,21 @@ function ProcessRequest(req,res) {
         else{
             res.writeHead(200);
             res.end(JSON.stringify(bookToFind));
+        }
+        
+        return
+    }
+
+    if(req.method == "GET" && pathname == "/book" && query.year != null)
+    {
+        var year = parseInt(query.year)
+        let booksToFind = _bookService.GetByYear(year);
+        if(booksToFind == null || booksToFind.length === 0){
+            _respFct.get500(res, `No book found for year '${year}' !`);
+        }
+        else{
+            res.writeHead(200);
+            res.end(JSON.stringify(booksToFind));
         }
         
         return
