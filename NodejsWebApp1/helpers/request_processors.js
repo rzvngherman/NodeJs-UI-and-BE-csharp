@@ -86,11 +86,17 @@ function ProcessGet(req, res) {
 function ProcessDelete(req, res) {
     switch (req.url) {
         case "/book":
-			collectRequestData(req, result => {
-				console.log(result);
-
-                _bookService.DeleteByTitle(result.title);
-                _respFct.get200(res, `Book with title '${result.title}' removed !`);
+			collectRequestData(req, result =>
+            {
+                try
+                {
+                    _bookService.DeleteByTitle(result.title);
+                    _respFct.get200(res, `Book with title '${result.title}' removed !`);
+                }
+                catch(error)
+                {
+                    _respFct.get500(res, error.message);
+                }                
             });
 
             break
@@ -105,17 +111,16 @@ function ProcessDelete(req, res) {
 function ProcessPost(req, res) {
     switch (req.url) {
         case "/books":
-			collectRequestData(req, result => {
-				console.log(result);
-
-                //TODO
-                var message = _bookService.AddBook(result);
-                if(message !== '')
+			collectRequestData(req, result => 
+            {
+                try
                 {
-                    _respFct.get500(res, message);
+                    var bookToAdd = new Book(result.title, result.author, result.year)
+                    _bookService.AddBook(bookToAdd);
+                    _respFct.get200(res, `Book with title '${result.title}' added !`);
                 }
-                else{
-                     _respFct.get200(res, `Book with title '${result.title}' added !`);
+                catch (error) {
+                    _respFct.get500(res, error.message);
                 }
             });
 

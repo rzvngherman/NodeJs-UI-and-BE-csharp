@@ -11,17 +11,14 @@ class BookService { // Name of the class
     }
       
     AddBook(book) {
-        let bookToFind = _bookList.find(o => o.title === book.title);
-        if(bookToFind !== undefined)
+        let bookToFind = _bookList.find(o => o.Title === book.Title);
+        if(bookToFind === undefined)
         {
-            // throw error ?
-            throw new Error(`Book with title '${book.title}' already exists !`)
-            //_respFct.get500(res, `Book with title '${result.title}' already exists !`);
-            //return `Book with title '${book.title}' already exists !`
-        }
-        else{
             _bookList.push(book);
-            return ""
+        }
+        else
+        {
+            throw new Error(`Book with title '${book.title}' already exists !`)
         }
     }
 
@@ -34,10 +31,10 @@ class BookService { // Name of the class
     }
 
     DeleteByTitle(title){
-        let bookToFind = _bookList.find(o => o.title === title);
-        if(bookToFind === undefined) {
-            //throw error ?
-            //_respFct.get500(res, `Book with title '${result.title}' does not exists.`);                    
+        let bookToFind = _bookList.find(o => o.Title === title);
+        if(bookToFind === undefined)
+        {
+            throw new Error(`Book with title '${title}' does not exists.`)         
         }
         else
         {
