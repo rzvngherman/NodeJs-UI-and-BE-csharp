@@ -3,6 +3,11 @@ const _bookReqProcess = require("./request_processor/book_request_processor");
 const _authorReqProcess = require("./request_processor/author_request_processor");
 var URL = require('url');
 
+const Alien = require('./models/alien');
+const Animal = require('./models/animals/animal');
+const Pig = require('./models/animals/pig');
+const Dog = require('./models/animals/dog');
+
 //method 'requestListener'
 const requestListener = function (req, res) {
     //Serving JSON
@@ -11,7 +16,7 @@ const requestListener = function (req, res) {
     const urlObj = URL.parse(req.url, true);
     var pathname = urlObj.pathname.toLowerCase();
     const query = urlObj.query;
-    
+
     switch (pathname) {
         case "/book":
         case "/books":

@@ -33,14 +33,14 @@ class BookService { // Name of the class
 
     DeleteByTitle(title){
         let bookToFind = _bookList.find(o => o.Title === title);
-        if(bookToFind === undefined)
+        // `value == null` is the same as `value === undefined || value === null`
+        if(bookToFind == null)
         {
             throw new Error(`Book with title '${title}' does not exists.`)         
         }
         else
         {
             _bookList.pop(bookToFind);
-            //_respFct.get200(res, `Book with title '${result.title}' removed !`);
         }
     }
 }
