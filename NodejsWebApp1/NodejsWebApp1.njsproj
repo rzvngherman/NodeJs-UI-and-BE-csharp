@@ -28,9 +28,32 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="02_basics_javascript.js" />
+    <Content Include="helpers\response_functions.js" />
+    <Content Include="models\alien.js" />
+    <Content Include="models\animals\animal.js" />
+    <Content Include="models\animals\dog.js" />
+    <Content Include="models\animals\pig.js" />
+    <Content Include="models\author.js" />
+    <Content Include="models\book.js" />
+    <Content Include="models\enemy.js" />
+    <Content Include="request_processor\author_request_processor.js" />
+    <Content Include="request_processor\book_request_processor.js" />
+    <Content Include="routes.js" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="server2.js" />
+    <Content Include="service\bookService.js" />
+    <Content Include="views\index.hbs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="helpers\" />
+    <Folder Include="models\" />
+    <Folder Include="models\animals\" />
+    <Folder Include="request_processor\" />
+    <Folder Include="service\" />
+    <Folder Include="views\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
