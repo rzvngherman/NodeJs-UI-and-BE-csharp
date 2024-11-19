@@ -11,6 +11,6 @@
   },
   "eslintConfig": {},
   "dependencies": {
-    "server": "^1.0.38"
+    "server": "^1.0.41"
   }
 }

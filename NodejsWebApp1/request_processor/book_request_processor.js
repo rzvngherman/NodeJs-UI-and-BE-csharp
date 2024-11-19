@@ -1,7 +1,9 @@
 var URL = require('url');
+
 const BookService = require('../service/bookService');
-const _respFct = require("../helpers/response_functions");
 const Book = require('../models/book');
+
+const _respFct = require("../helpers/response_functions");
 
 const _bookService = new BookService();
 
